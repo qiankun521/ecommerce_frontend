@@ -1,0 +1,23 @@
+.bannerContainer{
+    height: 50vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(211, 119, 119);
+    margin: 5vh 10vw 0 10vw;
+}
+.banner{
+    height: 50vh;
+    width: 100%;
+    background-color: rgb(64, 160, 160);
+    display: flex;
+}
+.circle{
+    background-color: aliceblue;
+    border-radius: 50%;
+    height: 25vw;
+    width: 25vw;
+}
+.title{
+    width: fit-content;
+    font-size: large;
+}

@@ -1,0 +1,24 @@
+.navContainer{
+    margin-top: 7vh;
+    margin-left: 8vw;
+    display: flex;
+}
+.nav{
+    display: flex;
+    width: 60vw;
+    align-items: center;
+    justify-content: space-around;
+}
+.link{
+    color: black;
+}
+.cartContainer{
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: flex-end;
+    margin-right: 10vw;
+}
+.cart{
+    font-size: x-large;
+}
