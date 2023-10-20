@@ -1,40 +1,31 @@
-import { Carousel } from "antd";
+import { Carousel, Image, Button } from "antd";
 import { Link } from "react-router-dom";
-import { BrowserRouter, Router } from "react-router-dom";
-import '../assets/styles/Banner.css'
-import getGoods from "../utils/getgoods";
-import { useEffect, useState } from "react";
+import styles from '../assets/styles/Banner.module.css'
 
-export default function Banner() {
-    const [haveGoods, setHaveGoods] = useState(false);
-    const [goods, setGoods] = useState([]);
-    useEffect(()=>{
-        async function checkInventory() {
-            const response=await getGoods();
-            const inventory=await response.json();
-            if(inventory.length){
-                setHaveGoods(true);
-                setGoods(inventory);
-                
-            }
-        }
-        if(!haveGoods){
-            checkInventory();
-        }
-    },[haveGoods])
+export default function Banner({ goods }) {
+    const bannerGoods = goods.filter((item) => item.categories.includes("首页"));
     return (
-        <div className="bannerContainer">
-            <Carousel autoplay>
-                {goods.filter((item) => item.categories.includes("首页"))
-                        .map((item) => {
-                            return (
-                                <div className="banner" key={item.id}>
-                                    <div className="title">{item.name}</div>
-                                    <div className="circle"></div>
+        <div className={styles.bannerContainer}>
+            <Carousel autoplay effect="fade" className={styles.carousel}>
+                {bannerGoods.map((item) => {
+                    return (
+                        <div key={item.id}>
+                            <div className={styles.banner}>
+                                <div className={styles.describe}>
+                                    <p className={styles.t1}>2023新款</p>
+                                    <p className={styles.t2}>{item.name}</p>
+                                    <p className={styles.t3}>仅需￥{item.price}</p>
+                                    <Link to={`/all/${item.id}`}><Button className={styles.bannerButton} type="default" size="large" ghost="trye" >立即购买</Button></Link>
                                 </div>
-                            );
-                        })}
+                                <div className={styles.circle}>
+                                    <Image alt={item.name} src={item.image} style={{ scale: "2" }} />
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })}
             </Carousel>
         </div>
+
     );
 }

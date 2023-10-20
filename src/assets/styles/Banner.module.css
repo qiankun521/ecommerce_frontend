@@ -1,0 +1,54 @@
+.bannerContainer{
+    height: 25vw;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 10vw 2rem 10vw;
+}
+.banner{
+    height: 25vw;
+    width: 100%;
+    background: linear-gradient(to right, rgba(6, 153, 245, 0.536), rgb(6, 126, 137));
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.circle{
+    background-color: aliceblue;
+    border-radius: 50%;
+    height: 20vw;
+    width: 20vw;
+    margin-right: 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.describe{
+    display: flex;
+    width: 30vw;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 80%;
+}
+.t1{
+    border-left: 1px solid black;
+    padding-left: 0.5rem;
+    font-size: 0.8rem;
+    margin: 0;
+}
+.t2{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+}
+.t3{
+    font-size: 1.1rem;
+    margin: 0;
+}
+.bannerButton{
+    font-size:"1rem";
+    padding:"0.5rem";
+    padding-top: 0;
+}
+
+
+

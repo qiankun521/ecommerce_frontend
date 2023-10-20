@@ -1,0 +1,8 @@
+.hotContainer{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 1rem;
+    margin: 2rem 10vw 2rem 10vw;
+    align-items: center;
+    justify-content: center;
+}

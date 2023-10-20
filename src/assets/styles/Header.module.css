@@ -1,5 +1,5 @@
 .navContainer{
-    margin-top: 7vh;
+    margin-top: 1.5vw;
     margin-left: 8vw;
     display: flex;
 }
@@ -11,6 +11,11 @@
 }
 .link{
     color: black;
+    font-size: 1rem;
+    text-decoration: none;
+}
+.link:hover{
+    text-shadow: 1px 1px 1px black;
 }
 .cartContainer{
     display: flex;

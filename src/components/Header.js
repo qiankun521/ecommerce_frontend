@@ -1,25 +1,28 @@
-import { Space } from "antd";
 import { Link } from "react-router-dom";
-import { BrowserRouter, Router } from "react-router-dom";
-import '../assets/styles/Header.css'
+import styles from '../assets/styles/Header.module.css'
 import logo from '../logo.svg';
 import { ShoppingCartOutlined } from '@ant-design/icons';
-export default function Header() {
+
+function Header() {
     return (
-        <div className="navContainer">
-            <Space direction="horizontal" size="large" align="left" className="nav">
-                <img src={logo} width={50} alt="" />
-                <Link to="/" className="link">首页</Link>
-                <Link to="/new" className="link">最近上新</Link>
-                <Link to="/sofa" className="link">沙发</Link>
-                <Link to="/livingroom" className="link">客厅好物</Link>
-                <Link to="/onsale" className="link">热销</Link>
-                <Link to="/chair" className="link">椅子</Link>
-                <Link to="/all" className="link">总览</Link>
-            </Space>
-            <div className="cartContainer">
-                <Link to="/cart" className="link"><ShoppingCartOutlined className="cart"/></Link>
+        <div className={styles.navContainer}>
+            <div className={styles.nav}>
+                <img src={logo} alt="logo" style={{ width: "3rem" }} />
+                <Link to="/" className={styles.link}>首页</Link>
+                <Link to="/new" className={styles.link}>最近上新</Link>
+                <Link to="/livingroom" className={styles.link}>客厅好物</Link>
+                <Link to="/onsale" className={styles.link}>热销</Link>
+                <Link to="/sofa" className={styles.link}>沙发</Link>
+                <Link to="/chair" className={styles.link}>椅子</Link>
+                <Link to="/all" className={styles.link}>总览</Link>
+            </div>
+            <div className={styles.cartContainer}>
+                <Link to="/cart" className={styles.link}>
+                    <ShoppingCartOutlined className={styles.cart} />
+                </Link>
             </div>
         </div>
+
     );
 }
+export default Header;
