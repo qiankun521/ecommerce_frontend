@@ -11,6 +11,7 @@ function Hot({ goods }) {
                     <Link key={item.id} to={`/all/${item.id}`} style={{
                         textDecoration: "none"
                     }}>
+                        {/* //TODO 将Hotsingle组件彻底抽象出来，当前依靠于Hot的css样式 */}
                         <HotSingle goods={item} style={{
                             width: "100%",
                             height: "20vw"

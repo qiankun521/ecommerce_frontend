@@ -3,8 +3,8 @@ import styles from '../assets/styles/BannerBottom.module.css'
 
 function BannerBottom({ goods }) {
     const bottomGoods = goods.filter((item) => item.categories.includes("展示"));
-    console.log(bottomGoods);
     return (
+        //TODO 做自适应适配，当前组件只能解决两个商品的情况
         <div className={styles.bannerBottomContainer}>
             {bottomGoods.map((item) => {
                 return (
@@ -12,8 +12,8 @@ function BannerBottom({ goods }) {
                         <div className={styles.bannerBottom}>
                             <div className={styles.imageContainer}>
                                 <img src={item.image} alt={item.name} style={{
-                                    height: "100%",
-                                    weight: "auto"
+                                    maxHeight: "100%",
+                                    maxWidth: "100%"
                                 }} />
                             </div>
                             <div className={styles.explain}>
