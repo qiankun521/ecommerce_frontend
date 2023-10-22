@@ -34,7 +34,3 @@ TODO
 ## 贡献
 
 我们欢迎所有的贡献。如果你想要贡献，请先创建一个 issue，或者直接创建一个 pull request。
-
-## 许可
-
-这个项目使用 MIT 许可。详情请查看 [LICENSE](LICENSE) 文件。

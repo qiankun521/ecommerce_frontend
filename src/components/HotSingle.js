@@ -1,5 +1,5 @@
 import { Parallax } from 'rc-scroll-anim';
-import styles from '../assets/styles/Single.module.css'
+import styles from '../assets/styles/HotSingle.module.css'
 import { FireOutlined } from '@ant-design/icons';
 
 

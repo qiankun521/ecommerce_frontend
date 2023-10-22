@@ -30,16 +30,17 @@
 }
 .p1{
     margin: 0;
-    padding-left: 2rem;
     margin-bottom: 1rem;
     color: black;
     font-size: 1.5rem;
     text-decoration: none;
+    width: 100%;
+    text-align: center;
 }
 .p2{
     margin: 0;
-    padding-left: 2rem;
     padding-bottom: 0.5rem;
     color: black;
     font-size: 0.8rem;
+    text-align: center;
 }

@@ -1,15 +1,17 @@
-const initCart = {};
+const initCart = {cartTotal:0};
 const cartReducer = (state = initCart, action) => {
     switch(action.type) {
         case 'ADD_TO_CART':{
             const {id,num} = action.payload;
             const newState = {...state};
             newState[id] = parseInt(newState[id] || 0) + parseInt(num);
+            newState.cartTotal += parseInt(num);
             return newState;
         }
         case 'REMOVE_FROM_CART':{
             const {id} = action.payload;
             const newState = {...state};
+            newState.cartTotal -= newState[id];
             delete newState[id];
             return newState;
         }
@@ -20,6 +22,7 @@ const cartReducer = (state = initCart, action) => {
             const {id} = action.payload;
             const newState = {...state};
             newState[id] = parseInt(newState[id] || 0) + 1;
+            newState.cartTotal += 1;
             return newState;
         }
         case 'DECREASE':{
@@ -27,6 +30,7 @@ const cartReducer = (state = initCart, action) => {
             const newState = {...state};
             newState[id] = parseInt(newState[id] || 0) - 1;
             if(newState[id] <= 0) delete newState[id];
+            else newState.cartTotal -= 1;
             return newState;
         }
         case 'SET_TO':{

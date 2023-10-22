@@ -1,13 +1,13 @@
 import Page from "./Page";
 import Waiting from "./Waiting";
 
-function All({goods,haveGoods}) {
+function Newpage({goods,haveGoods}) {
   return (
     haveGoods ? (
-      <Page keyword="全部" title="全部" goods={goods}></Page>
+      <Page title="新品上市" goods={goods}></Page>
     )
       :
       <Waiting></Waiting>
   )
 }
-export default All;
+export default Newpage;

@@ -6,11 +6,16 @@ import { setTo, decrease, increase, removeFromCart, clearCart } from "../redux/a
 import { useDispatch } from "react-redux";
 import { CloseCircleOutlined } from '@ant-design/icons';
 import { Button } from "antd";
+import QueueAnim from "rc-queue-anim";
+import message from "antd/lib/message";
+
 function CartPage() {
     const itemOb = useSelector(state => state.cart);
     const item = Object.entries(itemOb);
     const dispatch = useDispatch();
     item.forEach((element) => {
+        if(!element||element[0]==="cartTotal")return;
+        //TODO 有bug，cart清空后出现错误
         const tmp = element[1];
         element[1] = {};
         element[1].num = tmp;
@@ -22,6 +27,12 @@ function CartPage() {
     let sum = 0;
     function handleClear() {
         dispatch(clearCart());
+        message.success({
+            content: '清空购物车成功',
+                style: {
+                    marginTop: '1vh',
+                }
+        });
     }
     return (
         <div>
@@ -32,8 +43,12 @@ function CartPage() {
                 marginLeft: "15vw"
 
             }}>你的购物车</h1>
-            <div className={styles.cartContainer}>
+            <div className={styles.cartContainer} style={{
+                position: "relative"
+            }}>
+                <QueueAnim >
                 {item.length > 0 ? item.map(ele => {
+                    if(ele[0]==="cartTotal")return null;
                     sum += ele[1].num * ele[1].price;
                     function handleDecrease() {
                         dispatch(decrease(ele[0]));
@@ -80,15 +95,31 @@ function CartPage() {
                                     fontSize: "1.5rem"
                                 }} onClick={handleDelete} />
                             </div>
-                           
-                            
+
+
                         </div>
                     )
 
                 })
-                    : <div>你的购物车空空如也</div>} 
+                    : <div style={{
+                        fontSize: "1.2rem",
+                        marginTop: "1rem",
+                        marginBottom: "1rem",
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        height: "10vw",
+
+                    }}>你的购物车空空如也</div>
+                }
+                </QueueAnim>
+                <div className={styles.cartBottom}>
+                    <Button type="primary">去付款</Button>
                     <Button onClick={handleClear}>清空购物车</Button>
                     <div>总计：{sum}元</div>
+                </div>
+
 
 
             </div>

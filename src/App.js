@@ -9,7 +9,13 @@ import Footer from './components/Footer';
 import ID from './components/ID';
 import store from './redux/store';
 import { Provider } from 'react-redux';
-import CartPage from './components/CartPage';
+import Cartpage from './components/Cartpage';
+import Newpage from './components/Newpage';
+import Livingroompage from './components/Livingroompage';
+import Hotpage from './components/Hotpage';
+import Sofapage from './components/Sofapage';
+import Chairpage from './components/Chairpage';
+import All from './components/All';
 
 function App() {
   const [haveGoods, setHaveGoods] = useState(false);
@@ -36,25 +42,20 @@ function App() {
           <Header>
           </Header>
           <Routes>
-            {/* <Route path="/new">
-            <New />
-          </Route>
-          <Route path="/sofa">
-            <Sofa />
-          </Route>
-          <Route path="/livingroom">
-            <Livingroom />
-          </Route>
-          <Route path="/onsale">
-            <Onsale />
-          </Route>
-          <Route path="/chair">
-            <Chair />
-          </Route>
-          
-           */}
-          <Route path="/cart" element={<CartPage></CartPage>}>
-          </Route>
+            <Route path='/all' element={<All goods={goods} haveGoods={haveGoods}></All>}>
+            </Route>
+            <Route path='/chair' element={<Chairpage goods={goods} haveGoods={haveGoods}></Chairpage>}>
+            </Route>
+            <Route path='/sofa' element={<Sofapage goods={goods} haveGoods={haveGoods}></Sofapage>}>
+            </Route>
+            <Route path='/onsale' element={<Hotpage goods={goods} haveGoods={haveGoods}></Hotpage>}>
+            </Route>
+            <Route path='/livingroom' element={<Livingroompage goods={goods} haveGoods={haveGoods}></Livingroompage>}>
+            </Route>
+            <Route path="/new" element={<Newpage goods={goods} haveGoods={haveGoods}></Newpage>}>
+            </Route>
+            <Route path="/cart" element={<Cartpage></Cartpage>}>
+            </Route>
             <Route path="/all/:id" element={<ID></ID>}>
             </Route>
             <Route path="/" element={<Mainpage goods={goods} haveGoods={haveGoods}></Mainpage>}>
