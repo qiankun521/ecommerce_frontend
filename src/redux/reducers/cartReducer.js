@@ -29,8 +29,8 @@ const cartReducer = (state = initCart, action) => {
             const {id} = action.payload;
             const newState = {...state};
             newState[id] = parseInt(newState[id] || 0) - 1;
+            newState.cartTotal -= 1;
             if(newState[id] <= 0) delete newState[id];
-            else newState.cartTotal -= 1;
             return newState;
         }
         case 'SET_TO':{

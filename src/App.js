@@ -16,6 +16,9 @@ import Hotpage from './components/Hotpage';
 import Sofapage from './components/Sofapage';
 import Chairpage from './components/Chairpage';
 import All from './components/All';
+import Personal from './components/Personal';
+import LoginPage from './components/LoginPage';
+import RegisterPage from './components/RegisterPage';
 
 function App() {
   const [haveGoods, setHaveGoods] = useState(false);
@@ -42,6 +45,12 @@ function App() {
           <Header>
           </Header>
           <Routes>
+            <Route path='/register' element={<RegisterPage></RegisterPage>}>
+            </Route>
+            <Route path='/login' element={<LoginPage></LoginPage>}>
+            </Route>
+            <Route path='/personal' element={<Personal></Personal>}>
+            </Route>
             <Route path='/all' element={<All goods={goods} haveGoods={haveGoods}></All>}>
             </Route>
             <Route path='/chair' element={<Chairpage goods={goods} haveGoods={haveGoods}></Chairpage>}>

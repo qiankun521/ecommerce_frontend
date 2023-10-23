@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import styles from '../assets/styles/Header.module.css'
 import logo from '../logo.svg';
-import { ShoppingCartOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
+import { Badge } from "antd";
+import { useSelector } from "react-redux";
 
 function Header() {
+    const cartTotal = useSelector(state => state.cart.cartTotal);
     return (
         <div className={styles.navContainer}>
             <div className={styles.nav}>
@@ -17,8 +20,13 @@ function Header() {
                 <Link to="/all" className={styles.link}>总览</Link>
             </div>
             <div className={styles.cartContainer}>
+                <Link to="/personal" className={styles.link}>
+                <UserOutlined className={styles.cart} />
+                </Link>
                 <Link to="/cart" className={styles.link}>
-                    <ShoppingCartOutlined className={styles.cart} />
+                    <Badge count={cartTotal}>
+                        <ShoppingCartOutlined className={styles.cart} />
+                    </Badge>
                 </Link>
             </div>
         </div>

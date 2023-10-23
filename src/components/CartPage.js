@@ -15,7 +15,6 @@ function CartPage() {
     const dispatch = useDispatch();
     item.forEach((element) => {
         if(!element||element[0]==="cartTotal")return;
-        //TODO 有bug，cart清空后出现错误
         const tmp = element[1];
         element[1] = {};
         element[1].num = tmp;
@@ -39,7 +38,6 @@ function CartPage() {
             <h1 style={{
                 fontSize: "1.7rem",
                 marginTop: "1rem",
-                width: "100%",
                 marginLeft: "15vw"
 
             }}>你的购物车</h1>
@@ -47,7 +45,7 @@ function CartPage() {
                 position: "relative"
             }}>
                 <QueueAnim >
-                {item.length > 0 ? item.map(ele => {
+                {item.length > 1 ? item.map(ele => {
                     if(ele[0]==="cartTotal")return null;
                     sum += ele[1].num * ele[1].price;
                     function handleDecrease() {
