@@ -9,7 +9,7 @@ import { Button } from "antd";
 import QueueAnim from "rc-queue-anim";
 import message from "antd/lib/message";
 
-function CartPage() {
+function Cartpage() {
     const itemOb = useSelector(state => state.cart);
     const item = Object.entries(itemOb);
     const dispatch = useDispatch();
@@ -124,4 +124,4 @@ function CartPage() {
         </div>
     )
 }
-export default CartPage;
+export default Cartpage;
