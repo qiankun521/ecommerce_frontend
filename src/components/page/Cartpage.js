@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import getLocalStorage from "../utils/getLocalStorage";
-import styles from "../assets/styles/CartPage.module.css";
-import DeIncrease from "./DeIncrease";
-import { setTo, decrease, increase, removeFromCart, clearCart } from "../redux/actions/cartActions";
+import getLocalStorage from "../../utils/getLocalStorage";
+import styles from "../../assets/styles/CartPage.module.css";
+import DeIncrease from "../DeIncrease";
+import { setTo, decrease, increase, removeFromCart, clearCart } from "../../redux/actions/cartActions";
 import { useDispatch } from "react-redux";
 import { CloseCircleOutlined } from '@ant-design/icons';
 import { Button } from "antd";

@@ -1,9 +1,9 @@
-import Banner from "./Banner";
-import Waiting from "./Waiting";
-import BannerBottom from "./BannerBottom";
-import MainTitle from "./MainTitle";
-import Hot from "./Hot";
-import Classify from "./Classify";
+import Banner from "../Banner";
+import Waiting from "../Waiting";
+import BannerBottom from "../BannerBottom";
+import MainTitle from "../MainTitle";
+import Hot from "../Hot";
+import Classify from "../Classify";
 
 function Mainpage({goods,haveGoods}) {
   return (

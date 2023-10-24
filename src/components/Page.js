@@ -11,7 +11,6 @@ function Page({ title, goods }) {
             <h1 style={{
                 fontSize: "1.7rem",
                 marginTop: "1rem",
-                width: "100%",
                 marginLeft: "15vw"
             }}>{title}</h1>
             <div className={styles.pageContent}>

@@ -1,52 +1,44 @@
-import { Form, Input, Button, Checkbox } from 'antd';
-import { Link } from 'react-router-dom'
-import styles from '../assets/styles/LoginPage.module.css'
-import login from '../utils/login'
+import styles from '../../assets/styles/RegisterPage.module.css'
+import { Form, Input, Button, message } from 'antd';
+import loginRegister from '../../utils/register'
 import { useDispatch } from 'react-redux';
-import { loginSuccess, loginFailure, loginRequest } from "../redux/actions/loginRegisterAction";
-import { useNavigate } from 'react-router-dom';
-import { message } from 'antd';
-import { useRef } from 'react';
+import { registerSuccess, registerFailure, registerRequest } from "../../redux/actions/loginRegisterAction";
+import { useNavigate } from 'react-router';
+import {useRef} from 'react';
+import { useSelector } from 'react-redux';
 
-function LoginPage() {
+function RegisterPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const completeMessage = useRef(null);
-    async function test() {//测试APi是否正常
-        const promise = await fetch('http://147.182.167.70:3000/api/v1/ping');
-        const response = await promise.json();
-        message.success({
-            content: response,
-            style: {
-                marginTop: '1vh',
-            }
-        });
-    }
+    const completeMessage=useRef(null);
+    const registerWaiting = useSelector(state => state.loginRegister.registerWaiting);
     function onFinish(values) {
-        dispatch(loginRequest());
+        dispatch(registerRequest());
         message.loading({
-            content: '登录中，请稍候...',
+            content: '注册中，请稍候...',
             style: {
                 marginTop: '1vh',
             },
             duration: 0
         });
-        login(values.username, values.password).then((value) => {
+        loginRegister(values.username, values.password).then((value) => {
             message.destroy();
-            completeMessage.current = value.msg;
+            completeMessage.current=value.msg;
             if (value.status === 200) {
-                
-                dispatch(loginSuccess(value.data.user.user_name, value.data.token, value.msg));
+                dispatch(registerSuccess(value.msg));//200时后端返回msg:ok
                 message.success({
-                    content: "登录成功",
+                    content: "注册成功",
                     style: {
                         marginTop: '1vh',
+                    },
+                    onClick: () => {
+                        navigate('/login');
                     }
                 });
-                navigate('/personal');
+                navigate('/login');
             }
-            else {
-                dispatch(loginFailure(completeMessage.current));
+            else{
+                dispatch(registerFailure(value.msg));//30001时后端返回msg:注册时用户已存在
                 message.error({
                     content: completeMessage.current,
                     style: {
@@ -66,8 +58,9 @@ function LoginPage() {
             <h1 style={{
                 fontSize: "1.7rem",
                 marginTop: "1rem",
+                textAlign: "center"
 
-            }}>登录</h1>
+            }}>注册</h1>
             <Form
                 name="basic"
                 labelCol={{
@@ -114,37 +107,17 @@ function LoginPage() {
                 </Form.Item>
 
                 <Form.Item
-                    name="remember"
-                    valuePropName="checked"
-                    wrapperCol={{
-                        offset: 8,
-                        span: 16,
-                    }}
-                >
-                    <Checkbox>记住我</Checkbox>
-                </Form.Item>
-
-                <Form.Item
                     wrapperCol={{
                         offset: 8,
                         span: 16
                     }}
                 >
-                    <Button type="primary" htmlType="submit">
-                        登录
+                    <Button type="primary" htmlType="submit" disabled={registerWaiting}>
+                        注册
                     </Button>
-                    <Link to="/register">
-                        <Button type="default">
-                            注册
-                        </Button>
-                    </Link>
-                    <Button type="default" onClick={test}>
-                        测试
-                    </Button>
-
                 </Form.Item>
             </Form>
         </div>
-    );
+    )
 }
-export default LoginPage;
+export default RegisterPage;

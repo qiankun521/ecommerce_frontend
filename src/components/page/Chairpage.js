@@ -1,5 +1,5 @@
-import Page from "./Page";
-import Waiting from "./Waiting";
+import Page from "../Page";
+import Waiting from "../Waiting";
 
 function Chairpage({goods,haveGoods}) {
   return (

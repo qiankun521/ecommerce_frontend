@@ -1,4 +1,4 @@
-async function login(username, password) {
+async function loginRegister(username, password) {
     const user = {
         "user_name": username,
         "password": password,
@@ -22,4 +22,4 @@ async function login(username, password) {
     }
 }
 
-export default login;
+export default loginRegister;

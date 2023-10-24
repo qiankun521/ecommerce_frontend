@@ -1,42 +1,53 @@
-import styles from '../assets/styles/RegisterPage.module.css'
-import { Form, Input, Button, message } from 'antd';
-import register from '../utils/register'
+import { Form, Input, Button, Checkbox } from 'antd';
+import { Link } from 'react-router-dom'
+import styles from '../../assets/styles/LoginPage.module.css'
+import loginRegister from '../../utils/loginRegister'
 import { useDispatch } from 'react-redux';
-import { registerSuccess, registerFailure, registerRequest } from "../redux/actions/loginRegisterAction";
-import { useNavigate } from 'react-router';
-import {useRef} from 'react';
+import { loginSuccess, loginFailure, loginRequest } from "../../redux/actions/loginRegisterAction";
+import { useNavigate } from 'react-router-dom';
+import { message } from 'antd';
+import { useRef } from 'react';
+import { useSelector } from 'react-redux';
 
-function RegisterPage() {
+function LoginPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const completeMessage=useRef(null);
+    const completeMessage = useRef(null);
+    const loginWaiting = useSelector(state => state.loginRegister.loginWaiting);
+    async function test() {//测试APi是否正常
+        const promise = await fetch('http://147.182.167.70:3000/api/v1/ping');
+        const response = await promise.json();
+        message.success({
+            content: response,
+            style: {
+                marginTop: '1vh',
+            }
+        });
+    }
     function onFinish(values) {
-        dispatch(registerRequest());
+        dispatch(loginRequest());
         message.loading({
-            content: '注册中，请稍候...',
+            content: '登录中，请稍候...',
             style: {
                 marginTop: '1vh',
             },
             duration: 0
         });
-        register(values.username, values.password).then((value) => {
+        loginRegister(values.username, values.password).then((value) => {
             message.destroy();
-            completeMessage.current=value.msg;
+            completeMessage.current = value.msg;
             if (value.status === 200) {
-                dispatch(registerSuccess(value.msg));//200时后端返回msg:ok
+                dispatch(loginSuccess(value.data.user.user_name, value.data.token, value.msg));
                 message.success({
-                    content: "注册成功",
+                    content: "登录成功",
                     style: {
                         marginTop: '1vh',
-                    },
-                    onClick: () => {
-                        navigate('/login');
                     }
                 });
-                navigate('/login');
+                navigate('/personal');
             }
-            else{
-                dispatch(registerFailure(value.msg));//30001时后端返回msg:注册时用户已存在
+            else {
+                dispatch(loginFailure(completeMessage.current));
                 message.error({
                     content: completeMessage.current,
                     style: {
@@ -50,6 +61,12 @@ function RegisterPage() {
         })
     }
     function onFinishFailed(errorInfo) {
+        message.error({
+            content: "提交失败",
+            style: {
+                marginTop: '1vh',
+            }
+        });
     }
     return (
         <div className={styles.page}>
@@ -57,7 +74,7 @@ function RegisterPage() {
                 fontSize: "1.7rem",
                 marginTop: "1rem",
 
-            }}>注册</h1>
+            }}>登录</h1>
             <Form
                 name="basic"
                 labelCol={{
@@ -102,6 +119,16 @@ function RegisterPage() {
                 >
                     <Input.Password />
                 </Form.Item>
+                <Form.Item
+                    name="remember"
+                    valuePropName="checked"
+                    wrapperCol={{
+                        offset: 8,
+                        span: 16,
+                    }}
+                >
+                    <Checkbox>记住我</Checkbox>
+                </Form.Item>
 
                 <Form.Item
                     wrapperCol={{
@@ -109,12 +136,21 @@ function RegisterPage() {
                         span: 16
                     }}
                 >
-                    <Button type="primary" htmlType="submit">
-                        注册
+                    <Button type="primary" htmlType="submit" disabled={loginWaiting}>
+                        登录
                     </Button>
+                    <Link to="/register">
+                        <Button type="default" disabled={loginWaiting}>
+                            注册
+                        </Button>
+                    </Link>
+                    <Button type="dashed" onClick={test} disabled={loginWaiting}>
+                        测试
+                    </Button>
+
                 </Form.Item>
             </Form>
         </div>
-    )
+    );
 }
-export default RegisterPage;
+export default LoginPage;
