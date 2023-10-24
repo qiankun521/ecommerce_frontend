@@ -33,8 +33,9 @@ function LoginPage() {
         });
         login(values.username, values.password).then((value) => {
             message.destroy();
+            completeMessage.current = value.msg;
             if (value.status === 200) {
-                completeMessage.current = value.message;
+                
                 dispatch(loginSuccess(value.data.user.user_name, value.data.token, value.msg));
                 message.success({
                     content: "登录成功",
@@ -45,7 +46,6 @@ function LoginPage() {
                 navigate('/personal');
             }
             else {
-                completeMessage.current = value.message;
                 dispatch(loginFailure(completeMessage.current));
                 message.error({
                     content: completeMessage.current,
