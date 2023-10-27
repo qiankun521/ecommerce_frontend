@@ -8,11 +8,13 @@ import { CloseCircleOutlined } from '@ant-design/icons';
 import { Button } from "antd";
 import QueueAnim from "rc-queue-anim";
 import message from "antd/lib/message";
-
+import { useNavigate } from "react-router";
 function Cartpage() {
     const itemOb = useSelector(state => state.cart);
     const item = Object.entries(itemOb);
     const dispatch = useDispatch();
+    const logout = useSelector(state => state.loginRegister.logout);
+    const navigate = useNavigate();
     item.forEach((element) => {
         if(!element||element[0]==="cartTotal")return;
         const tmp = element[1];
@@ -32,6 +34,27 @@ function Cartpage() {
                     marginTop: '1vh',
                 }
         });
+    }
+    function handleBuy(){
+        if(logout){
+            message.error({
+                content: '未登录，请先登录',
+                style: {
+                    marginTop: '1vh',
+                }
+            });
+            navigate("/login");
+        }
+        else{
+            message.loading({
+                content: '创建订单中...',
+                style: {
+                    marginTop: '1vh',
+                },
+                duration: 0
+            });
+            navigate("/order");
+        }
     }
     return (
         <div>
@@ -113,7 +136,7 @@ function Cartpage() {
                 }
                 </QueueAnim>
                 <div className={styles.cartBottom}>
-                    <Button type="primary">去付款</Button>
+                    <Button type="primary" onClick={handleBuy}>去付款</Button>
                     <Button onClick={handleClear}>清空购物车</Button>
                     <div>总计：{sum}元</div>
                 </div>

@@ -49,7 +49,7 @@ function App() {
             </Route>
             <Route path='/login' element={<LoginPage></LoginPage>}>
             </Route>
-            <Route path='/personal' element={<Personal></Personal>}>
+            <Route path='/personal/*' element={<Personal></Personal>}>
             </Route>
             <Route path='/all' element={<All goods={goods} haveGoods={haveGoods}></All>}>
             </Route>

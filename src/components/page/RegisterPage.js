@@ -1,6 +1,6 @@
 import styles from '../../assets/styles/RegisterPage.module.css'
 import { Form, Input, Button, message } from 'antd';
-import loginRegister from '../../utils/register'
+import loginRegister from '../../utils/loginRegister'
 import { useDispatch } from 'react-redux';
 import { registerSuccess, registerFailure, registerRequest } from "../../redux/actions/loginRegisterAction";
 import { useNavigate } from 'react-router';
